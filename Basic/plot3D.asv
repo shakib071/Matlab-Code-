@@ -1,0 +1,11 @@
+[X, Y] = meshgrid(-2:0.1:2, -2:0.1:2);
+Z = X.^2 + Y.^2;
+%surf(X,Y,Z) % 3D Surface Plot
+%mesh(X,Y,Z) %3D wirefreame
+plot3(X,Y,Z) %3D curve
+title('3D suface plot')
+xlabel('X'),ylabel('Y'),zlabel('Z')
+saveas(gcf, 'plot1.png')    % save current figure
+
+
+%
