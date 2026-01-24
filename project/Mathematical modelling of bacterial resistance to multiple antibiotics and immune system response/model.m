@@ -1,3 +1,4 @@
+
 function dydt = model(t,y)
 % y(1)=s : sensitive bacteria
 % y(2)=r : resistant bacteria
