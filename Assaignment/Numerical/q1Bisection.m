@@ -18,7 +18,7 @@ while (i<=iter && abs(b-a)>tol)
     c=(a+b)/2;
 
     if(abs(f(c))<=tol)
-        fprintf('Approximate root in Bisection Method is  = %0.6f',c);
+        fprintf('Approximate root in Bisection Method is  = %0.6f\n',c);
         rootFound = true;
         break;
     end

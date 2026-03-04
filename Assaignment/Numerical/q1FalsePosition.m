@@ -19,7 +19,7 @@ while (i<=iter)
     c=b-((f(b).*(a-b))./(f(a)-f(b)));
 
     if(abs(f(c))<=tol)
-        fprintf('Approximate root in False Position Method is  = %0.6f',c);
+        fprintf('Approximate root in False Position Method is  = %0.6f\n',c);
         rootFound = true;
         break;
     end
