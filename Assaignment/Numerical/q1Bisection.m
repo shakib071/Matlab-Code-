@@ -1,0 +1,42 @@
+
+%Bisection
+f = @(x) x.^3 + x.^2 - 1;
+
+a = input('Enter Lower bound of Interval a = ');
+b = input('Enter Upper bound of Interval b = ');
+iter = input('Iteration = ');
+tol = input('Tolerence = ');
+
+if (f(a) * f(b) > 0)
+    disp('No root Found');
+    return;
+end 
+
+i=1;
+rootFound = false;
+while (i<=iter && abs(b-a)>tol)
+    c=(a+b)/2;
+
+    if(abs(f(c))<=tol)
+        fprintf('Approximate root in Bisection Method is  = %0.6f',c);
+        rootFound = true;
+        break;
+    end
+
+    if(f(a)*f(c)> 0)
+        a=c;
+    else
+        b=c;
+    end
+    i=i+1;
+end
+
+if rootFound == false 
+    fprintf('No Root Found ');
+end
+
+
+
+
+
+
