@@ -1,0 +1,89 @@
+#00900
+Here's a complete BSc project plan for this topic:
+
+---
+
+## BSc Project: Logistic Population Models with Harvesting
+
+### 1. Mathematical Analysis (Theory Section)
+
+| Item | What to Show |
+|------|-------------|
+| Logistic ODE derivation | Start from Malthus model → add carrying capacity → arrive at logistic equation |
+| Constant harvesting model | Derive `dP/dt = kP(1 - P/N) - a` and explain each parameter |
+| Periodic harvesting model | Derive `dP/dt = kP(1 - P/N) - a(1 + sin(bt))` and explain a, b |
+| Equilibrium derivation | Show full quadratic derivation → get P1, P2 formulas by hand |
+| Stability analysis | Show P1 is stable, P2 is unstable using `dF/dP` sign test |
+| MSY derivation | Derive Maximum Sustainable Yield = `kN/4` step by step |
+| Discriminant condition | Show when `disc > 0`, `= 0`, `< 0` and what each means biologically |
+
+---
+
+### 2. Tables
+
+| Table | What to Include |
+|-------|----------------|
+| Parameter table | k, N, a, b — definition, unit, value used, biological meaning |
+| Equilibrium table | Values of P1 and P2 for a = 0, 0.21, 0.22, 0.23, 0.24, 0.25 |
+| MSY table | Compute MSY for different k and N combinations |
+| Stability summary | For each a value: disc value, P1, P2, stable/unstable/extinct label |
+| Numerical vs analytic | Compare ODE45 final value vs analytical equilibrium — show they match |
+
+---
+
+### 3. Plots (Figures)
+
+| Figure | What to Plot | Why It Matters |
+|--------|-------------|----------------|
+| Fig 1 | Equilibrium map — P1 & P2 vs a | Shows how harvesting rate shrinks the safe zone |
+| Fig 2 | Phase portrait `dP/dt` vs P (constant) | Shows direction of population change visually |
+| Fig 3 | Slope field + trajectories (constant, a = a1) | Shows stable/unstable behavior |
+| Fig 4 | Slope field + trajectories (constant, a = a2 = MSY) | Shows saddle-node collapse |
+| Fig 5 | Slope field + trajectories (constant, a > MSY) | Shows extinction scenario |
+| Fig 6 | Slope field + trajectories (periodic, a = a1) | Shows oscillating harvest effect |
+| Fig 7 | Slope field + trajectories (periodic, a = a2) | Shows rapid population drop |
+| Fig 8 | Constant vs periodic side-by-side (same a, P0) | Direct comparison of both models |
+| Fig 9 | Final population vs a (extinction threshold curve) | Shows exactly where extinction begins |
+| Fig 10 | Effect of varying k (fix N, a) | Shows growth rate sensitivity |
+| Fig 11 | Effect of varying N (fix k, a) | Shows carrying capacity sensitivity |
+| Fig 12 | Effect of varying b in periodic model | Shows harvesting frequency sensitivity |
+
+---
+
+### 4. Analysis & Discussion Points
+
+| Topic | What to Discuss |
+|-------|----------------|
+| Biological interpretation of P1 | Safe equilibrium fish population the fishery settles to |
+| Biological interpretation of P2 | Danger threshold — if population falls below this, extinction follows |
+| MSY significance | Maximum harvest a fishery can sustain indefinitely |
+| Over-harvesting consequence | What happens when a > MSY — link to real-world fishery collapse |
+| Periodic vs constant comparison | Which model is more realistic, which allows more recovery time |
+| Effect of initial condition | Does the starting population matter? When does it not? |
+| Sensitivity analysis | Which parameter (k, N, a, b) affects the system most? |
+
+---
+
+### 5. Optional Extensions (to stand out)
+
+| Extension | Description |
+|-----------|-------------|
+| Bifurcation diagram | Plot equilibria vs a — shows the saddle-node bifurcation at MSY |
+| Two-species model | Add predator-prey interaction on top of harvesting |
+| Stochastic harvesting | Replace constant a with a + random noise using `randn` |
+| Real data fitting | Fit k and N to real fish population data using `lsqcurvefit` |
+| Optimal harvesting | Find the value of a that maximizes total yield over time |
+| Seasonal closure | Model periodic fishing bans — switch harvesting on/off |
+
+---
+
+### 6. Project Structure Suggestion
+
+| Chapter | Content |
+|---------|---------|
+| Chapter 1 | Introduction — fishery management problem, why models matter |
+| Chapter 2 | Mathematical background — logistic growth, ODE theory basics |
+| Chapter 3 | Model 1: Constant harvesting — theory, equilibria, stability, plots |
+| Chapter 4 | Model 2: Periodic harvesting — theory, numerical analysis, plots |
+| Chapter 5 | Comparison & sensitivity analysis |
+| Chapter 6 | Conclusion — biological implications, limitations, future work |
