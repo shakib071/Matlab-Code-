@@ -1,0 +1,70 @@
+#00700
+
+Here's everything copy-pasteable:
+
+---
+
+## Plots
+
+1. All 5 variables over time (s, r, b, INH, PZA) — Shows complete system dynamics at a glance
+2. Sensitive vs Resistant bacteria over time — Core result, shows resistance emerging
+3. Phase portrait s vs r — Shows trajectory and which equilibrium is reached
+4. Immune cells (b) vs total bacteria (s+r) — Shows immune response relative to infection load
+5. Antibiotic concentrations (INH, PZA) over time — Shows drug clearance kinetics
+6. Case A<B vs A>B side by side — Visually proves the threshold condition from the paper
+7. Vary immune strength η multiple curves on one plot — Shows how immune system strength changes outcome
+8. Vary fitness cost c multiple curves — Shows biological cost of resistance mattering
+9. 3D phase portrait s vs r vs b — More complete picture of system trajectory
+10. Bacteria load at day 30, 60, 90 as bar chart — Easy to read clinical summary
+
+---
+
+## Tables
+
+11. Parameter table with symbol, description, value, source — Reproduces Table 2 of the paper
+12. Equilibrium points E0 E1 E2 E3 with existence and stability conditions — Core mathematical result
+13. Computed A, B, C values for both cases — Shows the threshold check numerically
+14. Simulation results table at key time points showing time, s, r, b, INH, PZA — Concrete numbers behind the plots
+15. Sensitivity table showing how A and B change when each parameter changes by 20 percent — Shows which parameters matter most
+
+---
+
+## Mathematical Analysis
+
+16. Full ODE system written clearly with each term explained in plain English
+17. Calculate A, B, C by hand for both cases and verify against simulation
+18. Show the normalization step from original variables to normalized variables between 0 and 1
+19. Jacobian matrix evaluated at E2 with eigenvalues shown to be negative — Proves stability
+20. Show Routh-Hurwitz conditions are satisfied for your parameter values
+
+---
+
+## Biological Interpretation
+
+21. Simulate weak immune system low eta and low k vs strong immune system and compare
+22. Single antibiotic vs two antibiotics comparison plot to justify combination therapy
+23. Show what happens if antibiotic is stopped early by reducing tspan
+24. Show effect of increasing mutation rate alpha on resistance emergence
+25. Annotate plots with clinical events such as resistance emerges here or bacteria cleared
+
+---
+
+## MATLAB and Code
+
+26. Clean commented model function code listing
+27. Demonstrate NonNegative constraint by plotting with and without it
+28. Compare ode45 with ode23 and ode113 in accuracy vs speed table
+29. Export results table to CSV and open in Excel
+30. Sensitivity analysis loop using for loop to automate parameter sweep
+
+Must have:
+  ✓ Plots  1, 2, 3, 6, 7
+  ✓ Tables 11, 12, 13, 14
+  ✓ Maths  16, 17, 18
+  ✓ Bio    21, 22, 23
+
+Will impress examiner:
+  ✓ Plot   9  (3D phase portrait)
+  ✓ Table  15 (sensitivity analysis)
+  ✓ Maths  19, 20 (eigenvalue proof)
+  ✓ Code   30 (parameter sweep)

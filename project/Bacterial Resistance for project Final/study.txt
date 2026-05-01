@@ -1,0 +1,40 @@
+Variables:
+  s = sensitive bacteria    ─┐
+  r = resistant bacteria    ─┤── inside ONE person's body
+  b = immune cells          ─┘
+  a1 = INH antibiotic
+  a2 = PZA antibiotic
+
+Models: what happens INSIDE a single patient
+
+This is a within-host pharmacodynamic model.
+
+SIR                  This Model
+                ───                  ──────────
+Scale           population           single host
+                (thousands of        (one patient's
+                 people)              body)
+
+Variables       people               bacteria + immune
+                                     cells + drugs
+
+Dynamics        disease spread       drug vs bacteria
+                person to person     vs immune system
+
+Time scale      weeks/months         days (treatment)
+                (epidemic)           (course)
+
+Immune system   implicit in R        explicit (b)
+
+Treatment       not usually          central part
+                included             of the model
+
+Goal            how many people      will this drug
+                get infected?        kill the bacteria?
+
+
+SIR:        "How does disease spread between people?"
+This model: "How do bacteria, drugs, and immune cells
+             fight each other inside one patient?"
+
+
