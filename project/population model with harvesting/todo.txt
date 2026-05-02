@@ -87,3 +87,97 @@ Here's a complete BSc project plan for this topic:
 | Chapter 4 | Model 2: Periodic harvesting — theory, numerical analysis, plots |
 | Chapter 5 | Comparison & sensitivity analysis |
 | Chapter 6 | Conclusion — biological implications, limitations, future work |
+
+
+
+
+Here's the full breakdown:
+
+---
+
+## Chapter 1: Introduction
+
+| Section | Title | What to Write |
+|---------|-------|---------------|
+| 1.1 | Background | Brief history of population modeling — Malthus (1798), Verhulst logistic equation, why fish populations are studied |
+| 1.2 | Problem Statement | Overfishing is a global crisis — need mathematical tools to find safe harvesting limits |
+| 1.3 | Significance of the Study | Why this model matters — sustainability, food security, ecological balance |
+| 1.4 | Objectives | List 3–5 clear objectives (determine equilibria, analyze stability, compare harvesting models, find MSY) |
+| 1.5 | Scope and Limitations | Single species only, closed population, no environmental noise, no age structure |
+| 1.6 | Organization of the Study | One paragraph describing what each chapter contains |
+
+---
+
+## Chapter 2: Mathematical Background
+
+| Section | Title | What to Write |
+|---------|-------|---------------|
+| 2.1 | Ordinary Differential Equations | Basic definition of ODE, order, what a solution means |
+| 2.2 | Malthusian Growth Model | `dP/dt = kP` — unlimited exponential growth, its flaw |
+| 2.3 | Logistic Growth Model | `dP/dt = kP(1 - P/N)` — how carrying capacity N fixes the flaw |
+| 2.4 | Equilibrium Points | Definition of equilibrium (`dP/dt = 0`), how to find them |
+| 2.5 | Stability Analysis | Linearization method — compute `dF/dP` at equilibrium, sign determines stable/unstable |
+| 2.6 | Phase Portrait and Slope Field | What they are, how to read them, what arrows mean |
+| 2.7 | Numerical Methods | Brief explanation of RK4 / ode45 — why needed when analytic solution is hard |
+| 2.8 | Autonomous vs Non-autonomous ODE | Constant harvesting is autonomous, periodic is non-autonomous — key difference |
+
+---
+
+## Chapter 3: Model 1 — Constant Harvesting
+
+| Section | Title | What to Write |
+|---------|-------|---------------|
+| 3.1 | Model Formulation | Introduce `dP/dt = kP(1 - P/N) - a`, define every parameter with units and biological meaning |
+| 3.2 | Equilibrium Analysis | Set `dP/dt = 0`, derive quadratic `P² - NP + aN/k = 0`, solve for P1 and P2 by hand |
+| 3.3 | Discriminant Condition | Three cases: `disc > 0` (two equilibria), `disc = 0` (MSY point), `disc < 0` (extinction) |
+| 3.4 | Maximum Sustainable Yield | Derive MSY = `kN/4` — the maximum a before equilibria disappear |
+| 3.5 | Stability Analysis | Compute `dF/dP` at P1 and P2 — show P1 is stable (negative), P2 is unstable (positive) |
+| 3.6 | Parameter Table | Table of k, N, a values used with computed P1, P2 (your Table 1 from the lab) |
+| 3.7 | Results and Plots | Fig 1: equilibrium map, Fig 2: phase portrait, Fig 3: slope field + trajectories for a < MSY, Fig 4: a = MSY, Fig 5: a > MSY |
+| 3.8 | Discussion | Interpret each figure biologically — what P1 and P2 mean for a fishery manager |
+
+---
+
+## Chapter 4: Model 2 — Periodic Harvesting
+
+| Section | Title | What to Write |
+|---------|-------|---------------|
+| 4.1 | Model Formulation | Introduce `dP/dt = kP(1 - P/N) - a(1 + sin(bt))`, explain why sinusoidal — models fishing seasons |
+| 4.2 | Role of Parameter a | a controls the amplitude/intensity of harvesting — link to seasonal catch rate |
+| 4.3 | Role of Parameter b | b controls frequency — b=1 means one season per time unit, b=2 means two seasons |
+| 4.4 | Why No Analytic Solution | Explain non-autonomous nature — sine term makes separation of variables impossible |
+| 4.5 | Numerical Approach | Justify use of ode45 (RK4) — briefly explain how it works |
+| 4.6 | Results and Plots | Fig 6: slope field for a = a1, Fig 7: trajectories for a = a1, Fig 8: slope field for a = a2, Fig 9: trajectories for a = a2 |
+| 4.7 | Effect of Parameter b | Fig 10: plot trajectories for b = 0.5, 1, 2, 4 — show how frequency affects recovery |
+| 4.8 | Discussion | Interpret oscillating behavior — population never fully stabilizes, effect of harvest timing |
+
+---
+
+## Chapter 5: Comparison and Sensitivity Analysis
+
+| Section | Title | What to Write |
+|---------|-------|---------------|
+| 5.1 | Constant vs Periodic — Same Parameters | Side-by-side plot (Fig 11) — same k, N, a, P0 — compare long-term behavior |
+| 5.2 | Which Model is More Realistic | Argue periodic is closer to real fisheries — seasonal opening/closing of fishing grounds |
+| 5.3 | Effect of Growth Rate k | Fix N, a — vary k — plot how population equilibrium and MSY shift (Fig 12) |
+| 5.4 | Effect of Carrying Capacity N | Fix k, a — vary N — plot how the safe harvesting window changes (Fig 13) |
+| 5.5 | Effect of Harvesting Rate a | Fix k, N — vary a from 0 to beyond MSY — show extinction threshold curve (Fig 14) |
+| 5.6 | Effect of Initial Condition P0 | Show that P0 above P2 always survives, P0 below P2 goes extinct — Fig 15 |
+| 5.7 | Sensitivity Summary Table | Table ranking which parameter has most impact on MSY, P1, P2 |
+
+---
+
+## Chapter 6: Conclusion
+
+| Section | Title | What to Write |
+|---------|-------|---------------|
+| 6.1 | Summary of Findings | Restate key results — what P1, P2, MSY mean, how each model behaved |
+| 6.2 | Biological Implications | Translate math into fishery policy — never harvest above MSY, monitor if population falls below P2 |
+| 6.3 | Comparison of Models | One paragraph concluding which model better represents real harvesting scenarios |
+| 6.4 | Limitations of the Study | Single species, deterministic model, no spatial effects, no age structure, no predator |
+| 6.5 | Recommendations | Suggest periodic harvesting with seasonal closures as management strategy |
+| 6.6 | Future Work | Two-species model, stochastic harvesting, fitting to real data, optimal control theory |
+
+---
+
+Total comes to roughly **6 chapters, 38 sections** — a solid complete BSc thesis structure.
