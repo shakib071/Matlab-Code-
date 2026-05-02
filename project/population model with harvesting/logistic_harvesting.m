@@ -295,11 +295,13 @@ for i = 1:numel(a_sweep2)
     try
         [~, Pc] = ode45(@(t,P) k*P*(1-P/N) - ai,           tspan, P0, opts);
         P_final_c(i) = max(Pc(end), 0);
-    catch; end
+    catch
+    end
     try
         [~, Pp] = ode45(@(t,P) k*P*(1-P/N) - ai*(1+sin(b*t)), tspan, P0, opts);
         P_final_p(i) = max(Pp(end), 0);
-    catch; end
+    catch
+    end
 end
 
 plot(a_sweep2, P_final_c, 'b-', 'LineWidth', 2.2, 'DisplayName', 'Constant harvesting');

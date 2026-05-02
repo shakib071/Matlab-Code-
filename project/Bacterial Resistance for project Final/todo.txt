@@ -68,3 +68,224 @@ Will impress examiner:
   ✓ Table  15 (sensitivity analysis)
   ✓ Maths  19, 20 (eigenvalue proof)
   ✓ Code   30 (parameter sweep)
+
+
+
+
+Chapter 5 — Numerical Implementation
+This chapter is about HOW you solved it — the code and setup, not the results yet.
+
+
+5.1 Software and Tools Used
+    → just text: "MATLAB R20XX was used, ode45 solver..."
+
+5.2 MATLAB ODE Solver Selection
+    → TABLE: compare ode45 vs ode23 vs ode113 (speed, accuracy, steps)
+
+5.3 Model Implementation
+    → CODE LISTING: your model() function, params struct, y0 setup
+    → explain each piece in plain English below the code
+
+5.4 Simulation Cases
+    → TABLE: show your two cases side by side
+       Case I  → parameter values → A=? B=? → expected equilibrium
+       Case II → parameter values → A=? B=? → expected equilibrium
+
+
+Chapter 6 — Results and Discussion
+This chapter is about WHAT you found — all plots and result tables go here.
+
+
+6.1 Parameter Values Used
+    → TABLE: symbol, description, value, source
+
+6.2 Threshold Values A, B, C
+    → TABLE: computed values for both cases
+    → 2-3 lines of text explaining what A<B and A>B means
+
+6.3 Case I Results
+    → PLOT:  all 5 variables over time
+    → PLOT:  bacteria vs immune cells
+    → PLOT:  antibiotic concentrations
+    → TABLE: key values at t=0, 30, 60, 90
+    → TEXT:  what do these plots tell us biologically
+
+6.4 Case II Results
+    → PLOT:  all 5 variables over time
+    → PLOT:  phase portrait s vs r
+    → PLOT:  bacteria and immune coexistence
+    → TABLE: key values at t=0, 30, 60, 90
+    → TEXT:  what do these plots tell us biologically
+
+6.5 Effect of Immune System Strength
+    → PLOT:  multiple curves varying eta
+    → TEXT:  interpretation
+
+6.6 Effect of Fitness Cost
+    → PLOT:  multiple curves varying c
+    → TEXT:  interpretation
+
+6.7 Early Antibiotic Termination
+    → PLOT:  full course vs stopped at day 30 vs day 60
+    → TEXT:  clinical interpretation
+
+6.8 Single vs Combination Therapy
+    → PLOT:  one antibiotic vs two antibiotics
+    → TEXT:  why combination is better
+
+6.9 Sensitivity Analysis
+    → TABLE: each parameter varied ±20%, show effect on A and B
+    → TEXT:  which parameters are most critical
+
+6.10 Summary of Results
+    → TABLE: all findings summarised in one table
+    → TEXT:  2-3 paragraphs wrapping up everything
+
+
+Chapter 5 = CODE + setup tables + case definitions
+               (how you built and ran the simulation)
+
+Chapter 6 = PLOTS + result tables + your interpretation
+               (what the simulation showed you)
+
+Chapter 3 — Mathematical Model
+This is where you describe and build the model on paper.
+
+3.1 Model Description and Assumptions
+    → TEXT ONLY
+    → write in plain English what the model represents
+    → list your assumptions like:
+         - bacteria follow logistic growth
+         - resistance only comes from mutation
+         - immune cells respond proportionally to bacteria
+         - antibiotics decay at constant rate
+
+3.2 State Variables and Parameters
+    → TABLE: every variable and parameter explained
+    
+    Variable | Meaning              | Unit
+    ─────────────────────────────────────────
+    s(t)     | sensitive bacteria   | normalized
+    r(t)     | resistant bacteria   | normalized
+    b(t)     | immune cells         | normalized
+    a1(t)    | INH concentration    | normalized
+    a2(t)    | PZA concentration    | normalized
+
+3.3 The ODE System
+    → Write the equations by hand / LaTeX
+    → Label every single term:
+
+    ds/dt = β_S·s·(1-s-r)  -  η·s·b  -  s·Σ(αi+di)·ai
+              ↑                  ↑              ↑
+          logistic           immune         antibiotic
+          growth             killing        effect
+
+3.4 Normalization of Variables
+    → Show the substitution step:
+         S     R     B
+    s = ─── r = ─── b = ────
+         T     T     ωT
+    → Show how the big messy original system
+      becomes the clean normalized system
+    → This is pure algebra, show every step
+
+3.5 Biological Feasibility Region
+    → Define the region Ω
+    → Prove solutions stay inside Ω
+      (copy the proof from the paper, explain each line)
+
+3.6 Threshold Parameters A, B, C
+    → Define A, B, C with the formulas
+    → Explain in words what each one means:
+         A = survival ability of sensitive bacteria
+         B = survival ability of resistant bacteria
+         C = mutation contribution
+
+
+Chapter 4 — Mathematical Analysis
+This is where you analyse the model — find equilibria and prove stability.
+
+
+4.1 Equilibrium Points
+    → Set all derivatives = 0
+    → Solve the algebraic system
+    → Show the 4 equilibrium points:
+
+    E0 = (0, 0, 0, 1, ..., 1)   infection free
+    E1 = (0, 1, 0, 1, ..., 1)   resistant only
+    E2 = (0, B, B, 1, ..., 1)   resistant + immune
+    E3 = (s̄, r̄, b̄, 1, ..., 1) coexistence
+
+    → TABLE: existence conditions for each
+
+4.2 Local Stability Analysis
+    → Explain what local stability means in words:
+       "if we slightly disturb the system,
+        does it return to equilibrium?"
+
+    → Show the Jacobian matrix J (write it out)
+    → Explain what eigenvalues tell us:
+         all negative real parts → stable
+         any positive real part  → unstable
+
+    4.2.1 Routh-Hurwitz Criteria
+          → State the theorem
+          → Write the conditions for n=2 and n=3
+          → Explain why we need it
+            (easier than finding eigenvalues directly
+             for large matrices)
+
+    4.2.2 Stability of E2
+          → Substitute E2 into J
+          → Show the characteristic equation
+          → Apply Routh-Hurwitz
+          → Conclude: stable when A < B
+
+    4.2.3 Stability of E3
+          → Same process for E3
+          → Conclude: stable when A > B
+
+4.3 Global Stability Analysis
+    → Explain difference from local stability:
+       "local = small disturbance"
+       "global = ANY starting point converges"
+
+    4.3.1 Global Stability of E2
+          → Dulac-Bendixson criterion
+          → Show the Dulac function Φ = 1/rb
+          → Show the divergence calculation
+          → Conclude no periodic orbits exist
+          → Apply Poincare-Bendixson theorem
+
+    4.3.2 Global Stability of E3
+          → Lyapunov function approach
+          → Write out V(s,r,b)
+          → Show dV/dt < 0
+          → Conclude E3 is GAS
+
+4.4 Summary of Stability Conditions
+    → TABLE: clean summary of everything
+
+    Equilibrium | Exists when | Stable when
+    ────────────────────────────────────────
+    E0          | always      | never
+    E1          | always      | never
+    E2          | always      | A < B
+    E3          | A > B       | A > B
+
+
+
+Chapter 1 — Introduction
+1.1 Background and Motivation
+1.2 Problem Statement
+1.3 Objectives of the Study
+1.4 Scope and Limitations
+1.5 Organization of the Report
+
+Chapter 2 — Literature Review
+2.1 Bacterial Infections and Antibiotic Resistance
+2.2 Role of the Immune System in Bacterial Infections
+2.3 Multiple Antibiotic Therapy
+2.4 Mathematical Modelling in Infectious Diseases
+2.5 Within-Host Models vs Epidemiological Models
+2.6 Review of the Base Paper (Daşbaşı and Öztürk 2016)
