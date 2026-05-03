@@ -8,7 +8,7 @@ params = struct( ...
 
 % Initial conditions
 y0    = [0.80; 0.05; 0.05; 0.05; 0.02];
-tspan = 0:1:90;
+tspan = 0:1:200;
 opts  = odeset('RelTol',1e-8,'AbsTol',1e-10,'NonNegative',1:5);
 
 % Solve
@@ -30,7 +30,7 @@ ylabel('Normalized Concentration', 'FontSize', 12);
 title('Case I (A<B): Time-Dependent Changes of All Variables', 'FontSize', 13);
 legend('Sensitive (s)','Resistant (r)','Immune (b)','INH (a1)','PZA (a2)', ...
        'Location','best');
-ylim([-0.05 1.1]); xlim([0 90]);
+ylim([-0.05 1.1]); xlim([0 200]);
 
 % ── Plot 2: Bacteria vs Immune Cells ─────────────────────────────────────────
 figure;
@@ -70,3 +70,30 @@ T_table = table( ...
     {'Time','Sensitive','Resistant','TotalBacteria','ImmuneCells','INH','PZA'});
 
 disp(T_table)
+
+
+figure;
+hold on; grid on; box on;
+
+plot(s, r, 'b', 'LineWidth', 2);
+
+% Markers
+plot(s(1),   r(1),   'go', 'MarkerSize', 10, 'MarkerFaceColor', 'g');
+plot(s(end), r(end), 'rs', 'MarkerSize', 10, 'MarkerFaceColor', 'r');
+
+% Start label — push left since s(1)=0.80 is on right
+text(s(1)-0.20, r(1)-0.008, ...
+    sprintf('s=%.2f, r=%.2f', s(1), r(1)), ...
+     'FontSize', 10, 'FontWeight', 'bold');
+
+% End label — s(end)≈0, r(end)≈0.57
+text(s(end)+0.03, r(end), ...
+    sprintf('s=%.2f, r=%.2f', s(end), r(end)), ...
+     'FontSize', 10, 'FontWeight', 'bold');
+
+xlabel('Sensitive Bacteria (s)', 'FontSize', 12);
+ylabel('Resistant Bacteria (r)', 'FontSize', 12);
+title('Case I (A<B): Phase Portrait — s vs r', 'FontSize', 13);
+xlim([-0.05  1.0]);
+ylim([0  0.65]);
+grid on; box on;
