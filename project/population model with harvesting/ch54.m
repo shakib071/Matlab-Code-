@@ -7,7 +7,7 @@ clc; clear; close all;
 k   = 0.20;
 N   = 5;
 P0  = 4.0;
-b   = 1.0;
+b   = 0.5;
 MSY = k*N/4;
 
 opts = odeset('RelTol',1e-8,'AbsTol',1e-10,'NonNegative',1);
