@@ -45,8 +45,8 @@ end
 
 xline(30, 'k--', 'Day 30', 'FontSize', 10);
 xline(60, 'k:',  'Day 60', 'FontSize', 10);
-xlabel('Time (days)', 'FontSize', 12);
-ylabel('Total Bacteria (s+r)', 'FontSize', 12);
+xlabel('Time (days)','FontSize',  12);
+ylabel('Total Bacteria (s+r)','FontSize', 12);
 title('Effect of Early Antibiotic Termination on Bacterial Load', 'FontSize', 13);
 legend(labels, 'Location', 'best');
 ylim([0 1.1]);

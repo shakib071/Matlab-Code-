@@ -156,6 +156,8 @@ ylabel('Population  P', 'FontSize', 13);
 title(sprintf('Slope Field & Trajectories  (a = %.2f < MSY)', a), ...
       'FontSize', 13, 'FontWeight', 'bold');
 legend('Location', 'northeast', 'FontSize', 9);
+legend('show')
+legend('NumColumns', 2)
 xlim(tspan); ylim([0 N*1.35]);
 grid on; box on;
 set(gca, 'FontSize', 11);
