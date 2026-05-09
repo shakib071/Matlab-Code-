@@ -22,27 +22,73 @@ D  = N^2 - 4*(a*N/k);
 P1 = (N + sqrt(D)) / 2;
 P2 = (N - sqrt(D)) / 2;
 
-figure(1);
-set(gcf, 'Color', 'w', 'Position', [100 500 700 420]);
+figure('Position',[100 100 900 560], 'Color', 'white');
+hold on; grid on; box on;
 
-plot(t_c, P_c, 'b-', 'LineWidth', 2.2, 'DisplayName', 'Constant Harvesting');
-hold on;
-plot(t_p, P_p, 'r-', 'LineWidth', 2.2, 'DisplayName', 'Periodic Harvesting');
-yline(P1, '--b', 'LineWidth', 1.5, ...
-      'Label', sprintf('P1 = %.2f (stable)', P1), 'FontSize', 10, ...
-      'LabelHorizontalAlignment', 'left');
-yline(P2, '--r', 'LineWidth', 1.5, ...
-      'Label', sprintf('P2 = %.2f (unstable)', P2), 'FontSize', 10, ...
-      'LabelHorizontalAlignment', 'left');
+c1 = [0.85 0.10 0.10];   % deep red
+c2 = [0.05 0.40 0.85];   % vivid blue
+c3 = [0.10 0.72 0.20];   % vivid green
+c4 = [0.90 0.50 0.00];   % vivid orange
+c5 = [0.60 0.10 0.85];   % vivid purple
+c6 = [0.10 0.10 0.10];   % near black
 
-xlabel('Time  t', 'FontSize', 13);
-ylabel('Population  P', 'FontSize', 13);
-title(sprintf('Constant vs Periodic Harvesting  (k=%.2f, N=%d, a=%.2f, b=%.1f, P0=%.1f)', ...
-      k, N, a, b, P0), 'FontSize', 13, 'FontWeight', 'bold');
-legend('Location', 'northeast', 'FontSize', 11);
-xlim([0 60]); ylim([0 N*1.2]);
-grid on; box on;
-set(gca, 'FontSize', 11);
+% ── Trajectories ──────────────────────────────────────────────────────
+h1 = plot(t_c, P_c, '-', 'Color', c2, 'LineWidth', 2.8);
+h2 = plot(t_p, P_p, '-', 'Color', c1, 'LineWidth', 2.8);
+
+% ── Equilibrium Lines ─────────────────────────────────────────────────
+h3 = yline(P1, '--', 'Color', c2, 'LineWidth', 2.0);
+h4 = yline(P2, '--', 'Color', c1, 'LineWidth', 2.0);
+
+% ── Equilibrium Labels ────────────────────────────────────────────────
+text(1, P1 + N*0.04, ...
+     sprintf('P_1 = %.2f  (stable)', P1), ...
+     'FontSize', 11, 'FontName', 'Times New Roman', ...
+     'Color', c2, 'FontWeight', 'bold');
+
+text(1, P2 + N*0.04, ...
+     sprintf('P_2 = %.2f  (unstable)', P2), ...
+     'FontSize', 11, 'FontName', 'Times New Roman', ...
+     'Color', c1, 'FontWeight', 'bold');
+
+
+% ── Axis Labels ───────────────────────────────────────────────────────
+xlabel('Time  t', 'FontSize', 14, 'FontWeight', 'bold', ...
+       'FontName', 'Times New Roman');
+ylabel('Population  P', 'FontSize', 14, 'FontWeight', 'bold', ...
+       'FontName', 'Times New Roman');
+
+% ── Legend ────────────────────────────────────────────────────────────
+lgd = legend([h1 h2 h3 h4], ...
+             'Constant Harvesting', ...
+             'Periodic Harvesting', ...
+             sprintf('P_1 = %.2f  (stable)',   P1), ...
+             sprintf('P_2 = %.2f  (unstable)', P2), ...
+             'Location', 'northeast', 'FontSize', 11, ...
+             'FontName', 'Times New Roman');
+lgd.Box       = 'on';
+lgd.EdgeColor = [0.2 0.2 0.2];
+lgd.LineWidth = 1.2;
+lgd.Color     = [0.97 0.97 0.97];
+
+% ── Axis Styling ──────────────────────────────────────────────────────
+ax = gca;
+ax.FontSize      = 12;
+ax.FontName      = 'Times New Roman';
+ax.XColor        = 'k';
+ax.YColor        = 'k';
+ax.LineWidth     = 1.4;
+ax.GridColor     = [0.5 0.5 0.5];
+ax.GridAlpha     = 0.35;
+ax.GridLineStyle = '--';
+ax.TickDir       = 'out';
+ax.TickLength    = [0.012 0.025];
+ax.Position      = [0.15 0.13 0.78 0.78];
+
+xlim([0 60]);
+ylim([0 N*1.2]);
+
+exportgraphics(gcf, 'fig311.png', 'Resolution', 1200);
 
 % sgtitle(sprintf('Constant vs Periodic  (k=%.2f, N=%d, a=%.2f, b=%.1f, P0=%.1f)', ...
 %         k, N, a, b, P0), 'FontSize', 12, 'FontWeight', 'bold');
