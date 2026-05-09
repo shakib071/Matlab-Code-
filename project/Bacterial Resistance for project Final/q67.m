@@ -19,9 +19,16 @@ p_off = struct( ...
     'alpha1',0,'d1',0,'mu1',0.06, ...
     'alpha2',0,'d2',0,'mu2',0.03);
 
-figure;
+figure('Position',[100 100 900 560], 'Color', 'white');
 hold on; grid on; box on;
-
+c1 = [0.85 0.10 0.10];   % deep red
+c2 = [0.05 0.40 0.85];   % vivid blue
+c3 = [0.10 0.72 0.20];   % vivid green
+c4 = [0.90 0.50 0.00];   % vivid orange
+c5 = [0.60 0.10 0.85];   % vivid purple
+c6 = [0.10 0.10 0.10];   % near black for dashed
+colors1 = {c1, c2, c3};
+p1 = [];
 for i = 1:length(stop_days)
 
     tspan1 = 0:1:stop_days(i);
@@ -40,13 +47,41 @@ for i = 1:length(stop_days)
         s_full = y1(:,1) + y1(:,2);
     end
 
-    plot(t_full, s_full, colors{i}, 'LineWidth', 2);
+    temp = plot(t_full, s_full, '-', 'Color', colors1{i}, 'LineWidth', 2.8);
+    p1 = [p1, temp];
 end
 
-xline(30, 'k--', 'Day 30', 'FontSize', 10);
-xline(60, 'k:',  'Day 60', 'FontSize', 10);
-xlabel('Time (days)','FontSize',  12);
-ylabel('Total Bacteria (s+r)','FontSize', 12);
-title('Effect of Early Antibiotic Termination on Bacterial Load', 'FontSize', 13);
-legend(labels, 'Location', 'best');
-ylim([0 1.1]);
+temp2 = xline(30, '--', 'Color', c4, 'LineWidth', 2.0);
+temp3 = xline(60, '--', 'Color', c5, 'LineWidth', 2.0);
+xlabel('Time (days)','FontSize', 14, 'FontWeight', 'bold', ...
+       'FontName', 'Times New Roman');
+
+ylabel('Total Bacteria (s+r)', 'FontSize', 14, 'FontWeight', 'bold', ...
+       'FontName', 'Times New Roman');
+text(31, 1.05, 'Day 30', 'FontSize', 10, 'Color', c4, 'FontName', 'Times New Roman');
+text(61, 1.05, 'Day 60', 'FontSize', 10, 'Color', c5, 'FontName', 'Times New Roman');
+p1=[p1, temp2, temp3];
+% title('Effect of Early Antibiotic Termination on Bacterial Load', 'FontSize', 13);
+lgd = legend(p1,labels, 'Location', 'best', 'FontSize', 12, ...
+    'FontName', 'Times New Roman');
+lgd.Box       = 'on';
+lgd.EdgeColor = [0.2 0.2 0.2];
+lgd.LineWidth = 1.2;
+lgd.Color     = [0.97 0.97 0.97];
+
+% Axis styling
+ax = gca;
+ax.FontSize   = 12;
+ax.FontName   = 'Times New Roman';
+ax.XColor     = 'k';
+ax.YColor     = 'k';
+ax.LineWidth  = 1.4;
+ax.GridColor  = [0.5 0.5 0.5];
+ax.GridAlpha  = 0.35;
+ax.GridLineStyle = '--';
+ax.TickDir    = 'out';
+ax.TickLength = [0.012 0.025];
+ax.Position = [0.15 0.13 0.78 0.78];
+ylim([0,1.1]);
+
+exportgraphics(gcf, 'fig210.png', 'Resolution', 1200);

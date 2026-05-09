@@ -72,67 +72,127 @@ fprintf('A_both= %.4f  →  %s\n', A_both, condition(A_both, B_val));
 [t3, y3] = ode45(@(t,y) model(t,y,p_both), tspan, y0_both, opts);
 
 %% ── Figure 1: Total Bacterial Load ──────────────────────────────────
-figure('Position',[100 100 750 480]);
-hold on; grid on; box on;
+%% ── Figure 1: Total Bacterial Load ──────────────────────────────────
+% figure('Position',[100 100 900 560], 'Color', 'white');
+% hold on; grid on; box on;
 
-plot(t1, y1(:,1)+y1(:,2), 'r-',  'LineWidth', 2);
-plot(t2, y2(:,1)+y2(:,2), 'b-',  'LineWidth', 2);
-plot(t3, y3(:,1)+y3(:,2), 'g-',  'LineWidth', 2);
-yline(B_val, 'k--', 'LineWidth', 1.5);
+% % Vibrant custom colors
+% c1 = [0.85 0.10 0.10];   % deep red
+% c2 = [0.05 0.40 0.85];   % vivid blue
+% c3 = [0.10 0.72 0.20];   % vivid green
+% c4 = [0.10 0.10 0.10];   % near black for dashed
 
-xlabel('Time (days)',         'FontSize', 12);
-ylabel('Total Bacteria (s+r)','FontSize', 12);
-title('Single vs Combination Antibiotic Therapy', 'FontSize', 13, 'FontWeight', 'bold');
+% % Thick vibrant lines
+% p1 = plot(t1, y1(:,1)+y1(:,2), '-',  'Color', c1, 'LineWidth', 2.8);
+% p2 = plot(t2, y2(:,1)+y2(:,2), '-',  'Color', c2, 'LineWidth', 2.8);
+% p3 = plot(t3, y3(:,1)+y3(:,2), '-',  'Color', c3, 'LineWidth', 2.8);
+% p4 = yline(B_val, '--', 'Color', c4, 'LineWidth', 2.0, 'Alpha', 1.0);
 
-legend('INH only', ...
-       'PZA only', ...
-       'INH+PZA (Combination)', ...
-       sprintf('E_2 equilibrium (B = %.4f)', B_val), ...
-       'Location', 'northeast', 'FontSize', 10);
+% % Axis labels
+% xlabel('Time (days)',          'FontSize', 14, 'FontWeight', 'bold', ...
+%        'FontName', 'Times New Roman');
+% ylabel('Total Bacteria (s+r)', 'FontSize', 14, 'FontWeight', 'bold', ...
+%        'FontName', 'Times New Roman');
+% % title('Single vs Combination Antibiotic Therapy', ...
+%     %   'FontSize', 15, 'FontWeight', 'bold', 'FontName', 'Times New Roman');
 
-ylim([0 1.0]); xlim([0 90]);
+% % Legend with dashed line labeled
+% lgd = legend([p1 p2 p3 p4], ...
+%     'INH only', 'PZA only', 'INH+PZA (Combination)', ...
+%     sprintf('Equilibrium B = %.4f', B_val), ...
+%     'Location', 'best', 'FontSize', 12, ...
+%     'FontName', 'Times New Roman');
+% lgd.Box       = 'on';
+% lgd.EdgeColor = [0.2 0.2 0.2];
+% lgd.LineWidth = 1.2;
+% lgd.Color     = [0.97 0.97 0.97];
 
-% % Annotate final values
-% text(91, y1(end,1)+y1(end,2), sprintf('%.3f', y1(end,1)+y1(end,2)), ...
-%     'FontSize',9, 'Color','r', 'Clipping','off');
-% text(91, y2(end,1)+y2(end,2), sprintf('%.3f', y2(end,1)+y2(end,2)), ...
-%     'FontSize',9, 'Color','b', 'Clipping','off');
-% text(91, y3(end,1)+y3(end,2), sprintf('%.3f', y3(end,1)+y3(end,2)), ...
-%     'FontSize',9, 'Color','g', 'Clipping','off');
+% % Axis styling
+% ax = gca;
+% ax.FontSize   = 12;
+% ax.FontName   = 'Times New Roman';
+% ax.XColor     = 'k';
+% ax.YColor     = 'k';
+% ax.LineWidth  = 1.4;
+% ax.GridColor  = [0.5 0.5 0.5];
+% ax.GridAlpha  = 0.35;
+% ax.GridLineStyle = '--';
+% ax.TickDir    = 'out';
+% ax.TickLength = [0.012 0.025];
+% ax.Position = [0.15 0.13 0.78 0.78];
+
+% % Export high quality
+% exportgraphics(gcf, 'fig212.png', 'Resolution', 1200);
+
+
+
+
+
+
 
 %% ── Figure 2: Sensitive Bacteria Only ───────────────────────────────
-figure('Position',[100 100 750 480]);
+figure('Position',[100 100 900 560], 'Color', 'white');
 hold on; grid on; box on;
 
-plot(t1, y1(:,1), 'r-', 'LineWidth', 2);
-plot(t2, y2(:,1), 'b-', 'LineWidth', 2);
-plot(t3, y3(:,1), 'g-', 'LineWidth', 2);
+% Vibrant custom colors
+c1 = [0.85 0.10 0.10];   % deep red
+c2 = [0.05 0.40 0.85];   % vivid blue
+c3 = [0.10 0.72 0.20];   % vivid green
+c4 = [0.10 0.10 0.10];   % near black for dashed
 
-xlabel('Time (days)',           'FontSize', 12);
-ylabel('Sensitive Bacteria (s)','FontSize', 12);
-title('Single vs Combination Antibiotic Therapy', 'FontSize', 13, 'FontWeight', 'bold');
+p1=plot(t1, y1(:,1), '-', 'Color', c1, 'LineWidth', 2.8);
+p2=plot(t2, y2(:,1), '-', 'Color', c2, 'LineWidth', 2.8);
+p3=plot(t3, y3(:,1), '-', 'Color', c3, 'LineWidth', 2.8);
 
-legend('INH only', ...
+xlabel('Time (days)',            'FontSize', 14, 'FontWeight', 'bold', ...
+       'FontName', 'Times New Roman');
+ylabel('Sensitive Bacteria (s)','FontSize', 14, 'FontWeight', 'bold', ...
+       'FontName', 'Times New Roman');
+% title('Single vs Combination Antibiotic Therapy', 'FontSize', 13, 'FontWeight', 'bold');
+
+lgd=legend([p1 p2 p3], ...
+       'INH only', ...
        'PZA only', ...
        'INH+PZA (Combination)', ...
-       'Location', 'northeast', 'FontSize', 10);
+       'Location', 'best', 'FontSize', 12, ...
+    'FontName', 'Times New Roman');
 
-ylim([0 1.0]); xlim([0 90]);
+lgd.Box       = 'on';
+lgd.EdgeColor = [0.2 0.2 0.2];
+lgd.LineWidth = 1.2;
+lgd.Color     = [0.97 0.97 0.97];
 
-%% ── Numerical Results Table ──────────────────────────────────────────
-fprintf('\n══════════════════════════════════════════════════════\n');
-fprintf('  Day  |  INH only  |  PZA only  |  Combination\n');
-fprintf('──────────────────────────────────────────────────────\n');
-days = [0 10 20 30 40 50 60 70 80 90];
-for i = 1:length(days)
-    d = days(i) + 1;
-    fprintf('  %3d  |   %.4f   |   %.4f   |   %.4f\n', ...
-        days(i), ...
-        y1(d,1)+y1(d,2), ...
-        y2(d,1)+y2(d,2), ...
-        y3(d,1)+y3(d,2));
-end
-fprintf('══════════════════════════════════════════════════════\n');
+% Axis styling
+ax = gca;
+ax.FontSize   = 12;
+ax.FontName   = 'Times New Roman';
+ax.XColor     = 'k';
+ax.YColor     = 'k';
+ax.LineWidth  = 1.4;
+ax.GridColor  = [0.5 0.5 0.5];
+ax.GridAlpha  = 0.35;
+ax.GridLineStyle = '--';
+ax.TickDir    = 'out';
+ax.TickLength = [0.012 0.025];
+ax.Position = [0.15 0.13 0.78 0.78];
+ylim([0,1.1]);
+
+exportgraphics(gcf, 'fig211.png', 'Resolution', 1200);
+
+% %% ── Numerical Results Table ──────────────────────────────────────────
+% fprintf('\n══════════════════════════════════════════════════════\n');
+% fprintf('  Day  |  INH only  |  PZA only  |  Combination\n');
+% fprintf('──────────────────────────────────────────────────────\n');
+% days = [0 20 40 60 80 100 120 140 160 180];
+% for i = 1:length(days)
+%     d = days(i) + 1;
+%     fprintf('  %3d  |   %.4f   |   %.4f   |   %.4f\n', ...
+%         days(i), ...
+%         y1(d,1)+y1(d,2), ...
+%         y2(d,1)+y2(d,2), ...
+%         y3(d,1)+y3(d,2));
+% end
+% fprintf('══════════════════════════════════════════════════════\n');
 
 %% ── Model Function ───────────────────────────────────────────────────
 % function dydt = model(~, y, p)
